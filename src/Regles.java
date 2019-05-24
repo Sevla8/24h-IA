@@ -1,10 +1,9 @@
 public class Regles {
-	private Cell [][] plateau;
 	private int ligne = null;
 	private int colonne = null;
 	private int nbCoups = 0;
 	private Cell coups;
-	Board board =null;
+	Board board = null;
 
 	/* --------------------------------- CONSTRUCTEUR --------------------------------- */
 	public regles(Board board)
@@ -16,10 +15,11 @@ public class Regles {
 	//Règle 1
 	public boolean regle1()
 	{
+		Cell [][] cells = this.board.getCells();
 		if ( this.nbCoups == 0 )
 		{
-			if (this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'M' && this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'F' 
-				&& this.plateau[this.coups.getX()][this.coups.getY()].getState() == Cell.State.NOT_PLAYED)
+			if (cells[this.coups.getX()][this.coups.getY()].getValue() != 'M' && cells[this.coups.getX()][this.coups.getY()].getValue() != 'F' 
+				&& cells[this.coups.getX()][this.coups.getY()].getState() == Cell.State.NOT_PLAYED)
 			{
 				return true;
 			}
@@ -41,16 +41,6 @@ public class Regles {
 	}
 
 	/* --------------------------------- ACCESSEUR --------------------------------- */ 
-	//plateau
-	public Cell[][] getPlateau()
-	{
-		return this.plateau;
-	}
-	public void setPlateau(Cell[][] plateau)
-	{
-		this.plateau = plateau;
-	}
-
 	//ligne
 	public int getLigne()
 	{
@@ -69,6 +59,16 @@ public class Regles {
 	public void setColonne(int colonne)
 	{
 		this.colonne = colonne;
+	}
+
+	//Board
+	public Board getBoard()
+	{
+		return this.board;
+	}
+	public void setBoard(Board board)
+	{
+		this.board = board;
 	}
 
 	//nbDeCoups

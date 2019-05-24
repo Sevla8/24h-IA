@@ -3,7 +3,8 @@ public class Board {
     public static int BOARD_X = 100;
     public static int BOARD_Y = 100;
 
-    private LinkedList<Cell> listeDeCoups = new LinkedList<Cell>();
+    private Cell dernierCoup;
+    private Cell avantDernierCoup;
 
     private Cell cells[][];
 
@@ -37,9 +38,21 @@ public class Board {
         this.cells[x][y] = cell.clone();
     }
 
-    public LinkedList<Cell> getListeDeCoups()
+    public Cell getDernierCoup()
     {
-        return this.listeDeCoups;
+        return this.dernierCoup;
+    }
+    public void setDernierCoup(Cell c)
+    {
+        this.dernierCoup = c;
+    }
+    public Cell getAvantDernierCoup()
+    {
+        return this.avantDernierCoup;
+    }
+    public void setAvantDernierCoup(Cell c)
+    {
+        this.avantDernierCoup = c;
     }
 
     public Cell[][] getCells()
