@@ -3,6 +3,8 @@ public class Board {
     public static int BOARD_X = 100;
     public static int BOARD_Y = 100;
 
+    private LinkedList<Cell> listeDeCoups = new LinkedList<Cell>();
+
     private Cell cells[][];
 
     public Board(){
@@ -33,5 +35,10 @@ public class Board {
 
     public void put(int x, int y, Cell cell) {
         this.cells[x][y] = cell.clone();
+    }
+
+    public LinkedList<Cell> getListeDeCoups()
+    {
+        return this.listeDeCoups;
     }
 }

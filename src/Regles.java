@@ -18,8 +18,8 @@ public class Regles {
 	{
 		if ( this.nbCoups == 0)
 		{
-			if (this.plateau[this.coups][this.coups].getValue() != 'M' && this.plateau[this.coups][this.coups].getValue() != 'F' 
-				&& this.plateau[this.coups][this.coups].getState() == Cell.State.NOT_PLAYED)
+			if (this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'M' && this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'F' 
+				&& this.plateau[this.coups.getX()][this.coups.getY()].getState() == Cell.State.NOT_PLAYED)
 			{
 				return true;
 			}
