@@ -66,6 +66,20 @@ public class Cell {
         return this.c;
     }
 
+    public boolean getBorder(String s) {
+        if (s == "North") {
+            return this.borderNorth;
+        } else if (s == "West") {
+            return this.borderWest;
+        } else if (s == "South") {
+            return this.borderWest;
+        } else if (s == "East") {
+            return this.borderEast;
+        } else {
+            return false;
+        }
+    }
+
     public void setValue(char l) {
         this.c = l;
     }
