@@ -1,53 +1,86 @@
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-
-import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.InetAddress;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+import java.io.IOException;
 
 public class Client {
+    // server part
+    private static final int SERVER_PORT = 8000;
+    private static final String SERVER_IP = "172.16.97.13";
+    private static final int BUFFER_SIZE = 200;
 
-    private int port;
-    private String ip;
 
-    private Socket socket;
-    private BufferedReader reader;
-    private PrintWriter writer;
+    private InetAddress address;
+    private DatagramSocket socket;
+
+    private static final String TEAMNAME = "Tchebychev";
 
     private String currentGame;
 
-    public Client(int port, String ip) {
-        this.ip = ip;
-        this.port = port;
+    private static Client instance = null;
+
+    // port = 8000
+    // ip = 172.16.97.13
+    private Client() {
+        this.currentGame = "";
+        // try to establish connection
+        try {
+            this.connect();
+        } catch(Exception exception) {
+            System.err.println(exception.getMessage());
+            System.exit(1);
+        }
+
     }
 
-    private void connect() {
-        try {
-            this.socket = new Socket(this.ip, this.port);
-            this.reader = new BufferedReader(
-                new InputStreamReader(
-                    this.socket.getInputStream()
-                )
-            );
-            
-            this.writer = new PrintWriter(this.socket.getOutputStream());
+    public static final Client instance() {
+        return instance;
+    }
 
-        } catch(IOException connectionException) {
-            System.err.println("Error");
+    public static final void initialize() {
+        instance = new Client();
+    }
+
+    private void connect() throws Exception {
+        try {
+            this.socket = new DatagramSocket();
+            this.address = InetAddress.getByName(SERVER_IP);
+        } catch(IOException exception) {
+            throw new Exception("Get by name failed");
+        }
+
+        try {
+            this.sendData(TEAMNAME);
+            this.receiveData();
+        } catch(Exception sendDataException) {
+            throw sendDataException;
+        }
+
+        System.out.println(this.currentGame);
+    }
+
+    public void sendData(String data) throws Exception {
+        byte[] buffer = data.getBytes();
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, this.address, SERVER_PORT);
+        packet.setData(buffer);
+        try {
+            this.socket.send(packet);
+        } catch(IOException sendException) {
+            throw new Exception("Error when sending data");
         }
     }
 
-    public void sendData(String data) {
-        this.writer.println(data);
-        this.writer.flush();
-    }
-
-    public void receiveData() {
+    public void receiveData() throws Exception {
+        byte[] buffer = new byte[BUFFER_SIZE];
+        DatagramPacket packet = new DatagramPacket(buffer, BUFFER_SIZE, this.address, SERVER_PORT);
         try {
-            this.currentGame = this.reader.readLine();
-        } catch(IOException readException) {
-            System.err.println("Error when reading");
+            this.socket.receive(packet);
+        } catch(IOException receiveException) {
+            throw new Exception("Error when receiving data");
         }
+
+        this.currentGame = new String(packet.getData());
     }
 }

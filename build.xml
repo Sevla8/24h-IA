@@ -17,8 +17,6 @@
         <mkdir dir="${exe}" />
 
         <javac srcdir="${src}" destdir="${bin}">
-            <classpath>
-            </classpath>
         </javac>
         <antcall target="jar" />
     </target>
