@@ -1,32 +1,34 @@
 public class Regles {
-	private int ligne = null;
-	private int colonne = null;
 	private int nbCoups = 0;
-	private Cell coups;
 	Board board = null;
 
 	/* --------------------------------- CONSTRUCTEUR --------------------------------- */
-	public regles(Board board)
+	public Regles(Board board)
 	{
 		this.board = board;
 	}
 
 	/* --------------------------------- REGLES --------------------------------- */ 
-	//Règle 1
-	public boolean regle1()
+	//Règle 0
+	public boolean regle0(Cell c)
 	{
 		Cell [][] cells = this.board.getCells();
+		if (cells[c.getX()][c.getY()].getValue() != 'M' && cells[c.getX()][c.getY()].getValue() != 'F' 
+			&& cells[c.getX()][c.getY()].getState() == Cell.State.NOT_PLAYED)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//Règle 1
+	public boolean regle1(Cell c)
+	{
 		if ( this.nbCoups == 0 )
 		{
-			if (cells[this.coups.getX()][this.coups.getY()].getValue() != 'M' && cells[this.coups.getX()][this.coups.getY()].getValue() != 'F' 
-				&& cells[this.coups.getX()][this.coups.getY()].getState() == Cell.State.NOT_PLAYED)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return regle0(c);
 		}
 		else
 		{
@@ -35,32 +37,92 @@ public class Regles {
 	}
 
 	//Règle 2
-	public boolean regle2()
+	public boolean regle2(Cell c)
 	{
-		
+		if ( c.getX() == this.board.getDernierCoup().getX() || c.getY() == this.board.getDernierCoup().getY() )
+		{
+			return regle0(c);
+		}
+		else
+		{
+			return false;
+		}
 	}
+
+	//Règle 3
+	public boolean regle3(Cell c)
+	{
+		if ( c.getValue() != c.getDernierCoup().getValue() )
+		{
+			return regle0();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	//Règle 4
+	public boolean regle4(Cell c)
+	{
+		if ( c.getValue() != this.board.getAvantDernierCoup().getValue() )
+		{
+			return regle0();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	//Règle 5
+	public boolean regle5(Cell c)
+	{
+		if ( this.regle1(c) && this.regle2(c) && this.regle3(c) && this.regle4(c) )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	//Règle 6
+	public boolean regle6()
+	{
+		Cell [][] cells = this.board.getCells();
+		Cell c = null;
+
+		for ( int i = 0 ; i < cells.lenght ; i++ )
+		{
+			for ( int j = 0 ; j < cells[i].lenght ; j++ )
+			{
+				c = cells[i][j];
+				if ( this.regle1(c) && this.regle2(c) && this.regle3(c) && this.regle4(c) )
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	//Fin de Partie ?
+	public boolean partieContinue()
+	{
+		if ( this.nbCoups < 56 && regle6() )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 	/* --------------------------------- ACCESSEUR --------------------------------- */ 
-	//ligne
-	public int getLigne()
-	{
-		return this.ligne;
-	}
-	public void setLigne(int ligne)
-	{
-		this.ligne = ligne;
-	}
-
-	//colonne
-	public int getColonne()
-	{
-		return this.colonne;
-	}
-	public void setColonne(int colonne)
-	{
-		this.colonne = colonne;
-	}
-
 	//Board
 	public Board getBoard()
 	{
