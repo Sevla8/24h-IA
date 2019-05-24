@@ -1,9 +1,4 @@
 public class Cell {
-    private boolean borderNorth;
-    private boolean borderWest;
-    private boolean borderSouth;
-    private boolean borderEast;
-    private char name;
 
     public static enum State {
         NOT_PLAYED, HIM_PLAYED, ME_PLAYED
@@ -11,6 +6,12 @@ public class Cell {
 
     private char c;
     private State state;
+
+    private boolean borderNorth;
+    private boolean borderWest;
+    private boolean borderSouth;
+    private boolean borderEast;
+    private char name;
 
     public Cell() {
         this.c = 'M';
@@ -47,7 +48,9 @@ public class Cell {
             this.borderWest = true;
         } else if (value == "South") {
             this.borderSouth = true;
-        }else if(value == "")
+        } else if (value == "East") {
+            this.borderEast = true;
+        }
     }
 
     @Override
@@ -61,6 +64,10 @@ public class Cell {
 
     public char getValue() {
         return this.c;
+    }
+
+    public void setValue(char l) {
+        this.c = l;
     }
 
     public State getState() {
