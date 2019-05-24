@@ -13,18 +13,24 @@ public class Cell {
     private boolean borderEast;
     private char name;
 
-    public Cell() {
+    private int x;
+    private int y;
+
+    public Cell(int x, int y) {
         this.c = 'M';
         this.state = State.NOT_PLAYED;
+        this.x = x;
+        this.y = y;
     }
 
-    public Cell(char c, State state) {
+    public Cell(char c, State state, int x, int y) {
+        super(x,y);
         this.c = c;
         this.state = state;
     }
 
     public Cell clone() {
-        return new Cell(this.c, this.state);
+        return new Cell(this.c, this.state, this.x, this.y);
     }
 
     @Override
@@ -86,5 +92,14 @@ public class Cell {
 
     public State getState() {
         return this.state;
+    }
+
+    public int getX()
+    {
+        return this.x;
+    }
+    public int getY()
+    {
+        return this.y;
     }
 }

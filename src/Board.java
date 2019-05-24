@@ -1,7 +1,10 @@
 public class Board {
 
-    public static int BOARD_X = 100;
-    public static int BOARD_Y = 100;
+    public static int BOARD_X = 10;
+    public static int BOARD_Y = 10;
+
+    private Cell dernierCoup;
+    private Cell avantDernierCoup;
 
     private Cell cells[][];
 
@@ -33,5 +36,27 @@ public class Board {
 
     public void put(int x, int y, Cell cell) {
         this.cells[x][y] = cell.clone();
+    }
+
+    public Cell getDernierCoup()
+    {
+        return this.dernierCoup;
+    }
+    public void setDernierCoup(Cell c)
+    {
+        this.dernierCoup = c;
+    }
+    public Cell getAvantDernierCoup()
+    {
+        return this.avantDernierCoup;
+    }
+    public void setAvantDernierCoup(Cell c)
+    {
+        this.avantDernierCoup = c;
+    }
+
+    public Cell[][] getCells()
+    {
+        return this.cells;
     }
 }
