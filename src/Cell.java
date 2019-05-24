@@ -16,18 +16,21 @@ public class Cell {
     private int x;
     private int y;
 
-    public Cell() {
+    public Cell(int x, int y) {
         this.c = 'M';
         this.state = State.NOT_PLAYED;
+        this.x = x;
+        this.y = y;
     }
 
-    public Cell(char c, State state) {
+    public Cell(char c, State state, int x, int y) {
+        super(x,y);
         this.c = c;
         this.state = state;
     }
 
     public Cell clone() {
-        return new Cell(this.c, this.state);
+        return new Cell(this.c, this.state, this.x, this.y);
     }
 
     @Override
@@ -84,13 +87,5 @@ public class Cell {
     public int getY()
     {
         return this.y;
-    }
-    public void setX(int x)
-    {
-        this.x = x;
-    }
-    public void setX(int y)
-    {
-        this.y = y;
     }
 }
