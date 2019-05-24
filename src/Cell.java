@@ -22,6 +22,29 @@ public class Cell {
         return new Cell(this.c, this.state);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null)
+            return false;
+        if (object.getClass() != this.getClass())
+            return false;
+        Cell cell = (Cell) object;
+        if (this.c != cell.getValue())
+            return false;
+        if (this.state != cell.getState())
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String string = new String("");
+        string += "location : "+this+"\n";
+        string += "c : "+this.c+"\n";
+        string += "state : "+this.state+"\n";
+        return string;
+    }
+
     public char getValue() {
         return this.c;
     }
