@@ -13,6 +13,9 @@ public class Cell {
     private boolean borderEast;
     private char name;
 
+    private int x;
+    private int y;
+
     public Cell() {
         this.c = 'M';
         this.state = State.NOT_PLAYED;
@@ -72,5 +75,22 @@ public class Cell {
 
     public State getState() {
         return this.state;
+    }
+
+    public int getX()
+    {
+        return this.x;
+    }
+    public int getY()
+    {
+        return this.y;
+    }
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+    public void setX(int y)
+    {
+        this.y = y;
     }
 }
