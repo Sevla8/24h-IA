@@ -2,21 +2,21 @@ public class Regles {
 	private Cell [][] plateau;
 	private int ligne = null;
 	private int colonne = null;
-	private Cell [] listeDeCoups = null;
 	private int nbCoups = 0;
 	private Cell coups;
+	Board board =null;
 
 	/* --------------------------------- CONSTRUCTEUR --------------------------------- */
-	public regles(Cell[][] plateau)
+	public regles(Board board)
 	{
-		this.plateau = plateau;
+		this.board = board;
 	}
 
 	/* --------------------------------- REGLES --------------------------------- */ 
 	//Règle 1
 	public boolean regle1()
 	{
-		if ( this.nbCoups == 0)
+		if ( this.nbCoups == 0 )
 		{
 			if (this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'M' && this.plateau[this.coups.getX()][this.coups.getY()].getValue() != 'F' 
 				&& this.plateau[this.coups.getX()][this.coups.getY()].getState() == Cell.State.NOT_PLAYED)
@@ -69,16 +69,6 @@ public class Regles {
 	public void setColonne(int colonne)
 	{
 		this.colonne = colonne;
-	}
-
-	//listeDeCoups
-	public Cell[] getListeDeCoups()
-	{
-		return this.listeDeCoups;
-	}
-	public void setListeDeCoups(Cell [] listeDeCoups)
-	{
-		this.listeDeCoups = listeDeCoups;
 	}
 
 	//nbDeCoups

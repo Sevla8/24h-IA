@@ -41,4 +41,9 @@ public class Board {
     {
         return this.listeDeCoups;
     }
+
+    public Cell[][] getCells()
+    {
+        return this.cells;
+    }
 }
