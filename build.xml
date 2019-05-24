@@ -1,0 +1,42 @@
+<!--  https://skebir.developpez.com/tutoriels/java/ant!-->
+<project name="Chess-Game" default="run" basedir=".">
+
+    <!-- DIRS OF THE PROJECT !-->
+    <property name="src" location="src" />
+
+    <property name="bin" location="bin" />
+
+    <property name="exe" location="exe"/>
+    <target name="clean">
+        <delete dir="bin" />
+        <delete dir="exe" />
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${bin}" />
+        <mkdir dir="${exe}" />
+
+        <javac srcdir="${src}" destdir="${bin}">
+            <classpath>
+            </classpath>
+        </javac>
+        <antcall target="jar" />
+    </target>
+
+    <target name="jar">
+        <jar destfile="${exe}/Application.jar" basedir="${bin}">
+            <manifest>
+                <attribute name="Main-Class" value="Application"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="compile">
+        <java jar="exe/Application.jar" fork="true">
+        </java>
+    </target>
+
+    <target name="javadoc" depends="compile">
+    </target>
+
+</project>
