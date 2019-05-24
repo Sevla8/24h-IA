@@ -54,6 +54,7 @@ public class Client {
         try {
             this.sendData(TEAMNAME);
             this.receiveData();
+            this.receiveData();
         } catch(Exception sendDataException) {
             throw sendDataException;
         }
