@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 public class AI {
 
     private Board board;
@@ -6,10 +8,10 @@ public class AI {
         this.board = initialBoard;
     }
 
-    public void play() {
+    public Point play() {
         
     }
-    public void interpret(Cell himPlay) {
+    public void interpret(Point himPlay) {
         
     }
 }
