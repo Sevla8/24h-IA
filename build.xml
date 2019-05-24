@@ -1,5 +1,5 @@
 <!--  https://skebir.developpez.com/tutoriels/java/ant!-->
-<project name="Chess-Game" default="run" basedir=".">
+<project name="24H" default="run" basedir=".">
 
     <!-- DIRS OF THE PROJECT !-->
     <property name="src" location="src" />
