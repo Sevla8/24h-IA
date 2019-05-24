@@ -9,7 +9,7 @@ public class Converter {
     public char[][] convert(int[][] entiers) {
         char lettre = 'a';
         char mer = 'M';
-        int size = entiers.length;
+        int size = entiers[0].length;
         char[][] charac = new tab[size][size];
 
         for (int i = 0; i < size; i++) {
@@ -43,12 +43,16 @@ public class Converter {
         int j = 0;
         for (int i = 0; i < size; i++) {
             for (j = 0; j < size; j++) {
-                if (j != 0 && !this.rowCase[i][j].getBorder("Top")) {
+                if (j != 0 && !this.rowCase[i][j].getBorder("North")) {
                     this.rowCase[i][j].setValue(this.rowCase[i][j].getValue());
+                } else if (i != 0 && !this.rowCase[i][j].getBorder("North")) {
+                    this.rowCase[i][j].setValue(this.setValue(this.rowCase[i - 1][j].getValue()));
+                } else if (!this.rowCase[i][j].getBorder("West")) {
+
                 }
             }
         }
 
-        return charac;
+        return null;
     }
 }
