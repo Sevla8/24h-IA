@@ -1,7 +1,7 @@
 public class Board {
 
-    public static int BOARD_X = 100;
-    public static int BOARD_Y = 100;
+    public static int BOARD_X = 10;
+    public static int BOARD_Y = 10;
 
     private Cell dernierCoup;
     private Cell avantDernierCoup;
