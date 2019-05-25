@@ -95,6 +95,10 @@ public class Cell {
         return this.state;
     }
 
+    public void setState(State state) {
+        this.state = state;
+    }
+
     public int getX() {
         return this.x;
     }

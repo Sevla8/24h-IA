@@ -4,6 +4,7 @@ import java.util.*;
 public class AI {
     private Board board;
     private Regles regle;
+    public Random rand = new Random();
 
 
     public AI(Board initialBoard) {
@@ -12,7 +13,7 @@ public class AI {
     }
 
     // public Point play() {
-        
+        // int x = this
     // }
 
     // public void interpret(Point himPlay) {
@@ -153,13 +154,20 @@ public class AI {
 			}
 		}
 	}
-
+    public Regles getRegles(){
+        return this.regle;
+    }
 	public Cell jouerOuNon()
 	{
-		if (this.regle.regle6())
+        this.regle.setNbCoups(this.regle.getNbCoups() + 1);
+		if (this.regle.partieContinue())
 		{
-			this.regle.setNbCoups(this.regle.getNbCoups()+1);
-			return this.jouerList(this.possibylities());
+            this.regle.setNbCoups(this.regle.getNbCoups() + 1);
+
+            Cell cell = this.jouerList(this.possibylities());
+            this.board.setCell(cell.getX(), cell.getY(), Cell.State.ME_PLAYED);
+            setLesDernierCoups(cell);
+            return cell;
 		}
 		else
 		{

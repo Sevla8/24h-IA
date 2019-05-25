@@ -18,7 +18,7 @@ public class Regles {
 		{
 			return true;
 		}
-		else 
+		else
 		{
 			return false;
 		}
@@ -26,11 +26,9 @@ public class Regles {
 	//Règle 1
 	public boolean regle1(Cell c)
 	{
-		
-		//if ( this.board.getNbCoups() == 0 )
 		if ( this.nbCoups == 0 )
 		{
-			return this.regle0(c);
+			return regle0(c);
 		}
 		else
 		{
@@ -41,46 +39,66 @@ public class Regles {
 	//Règle 2
 	public boolean regle2(Cell c)
 	{
-		if ( c.getX() == this.board.getDernierCoup().getX() || c.getY() == this.board.getDernierCoup().getY() )
-		{
-			return this.regle0(c);
-		}
-		else
-		{
-			return false;
-		} 
+        if (this.board.getDernierCoup() != null )
+        {
+            if ( c.getX() == this.board.getDernierCoup().getX() || c.getY() == this.board.getDernierCoup().getY() )
+            {
+                return regle0(c);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else{
+            return true;
+        }
+		
 	}
 
 	//Règle 3
 	public boolean regle3(Cell c)
 	{
-		if ( c.getValue() != this.board.getDernierCoup().getValue() )
-		{
-			return this.regle0(c);
-		}
-		else
-		{
-			return false;
-		}
+        if (this.board.getDernierCoup() != null )
+        {
+            if ( c.getValue() != this.board.getDernierCoup().getValue() )
+            {
+                return regle0(c);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else<{
+            return true;
+        }
 	}
 
 	//Règle 4
 	public boolean regle4(Cell c)
 	{
-		if ( c.getValue() != this.board.getAvantDernierCoup().getValue() )
-		{
-			return this.regle0(c);
-		}
-		else
-		{
-			return false;
-		}
+        if ( this.board.getAvantDernierCoup() != null)
+        {
+            if ( c.getValue() != this.board.getAvantDernierCoup().getValue() )
+            {
+                return regle0(c);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
 	}
 
 	//Règle 5
 	public boolean regle5(Cell c)
 	{
-		if ( this.regle2(c) && this.regle3(c) && this.regle4(c) )
+		if ( this.regle1(c) && this.regle2(c) && this.regle3(c) && this.regle4(c) )
 		{
 			return true;
 		}
@@ -96,12 +114,12 @@ public class Regles {
 		Cell [][] cells = this.board.getCells();
 		Cell c = null;
 
-		for ( int i = 0 ; i < cells.length ; i++ )
+		for ( int i = 0 ; i < cells.length; i++ )
 		{
 			for ( int j = 0 ; j < cells[i].length ; j++ )
 			{
 				c = cells[i][j];
-				if ( this.regle2(c) && this.regle3(c) && this.regle4(c) )
+				if (this.regle2(c) && this.regle3(c) && this.regle4(c))
 				{
 					return true;
 				}
@@ -113,7 +131,6 @@ public class Regles {
 	//Fin de Partie ?
 	public boolean partieContinue()
 	{
-		//if ( this.board.getNbCoups() < 56 && regle6() )
 		if ( this.nbCoups < 56 && regle6() )
 		{
 			return true;
@@ -125,7 +142,7 @@ public class Regles {
 	}
 
 
- 	/* --------------------------------- ACCESSEUR --------------------------------- */ 
+	/* --------------------------------- ACCESSEUR --------------------------------- */ 
 	//Board
 	public Board getBoard()
 	{
@@ -141,9 +158,9 @@ public class Regles {
 	{
 		return this.nbCoups;
 	}
-	public void setNbCoups(int nbCoup)
+	public void setNbCoups(int nbCoups)
 	{
-		this.nbCoups = nbCoup;
+		this.nbCoups = nbCoups;
 	}
 
 }

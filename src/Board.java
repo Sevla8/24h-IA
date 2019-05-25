@@ -40,6 +40,12 @@ public class Board {
         }
     }
 
+    public void setLesDernierCoups(Cell c)
+    {
+        this.avantDernierCoup = this.dernierCoup;
+        this.dernierCoup = c;
+    }
+
     public Board clone() {
         return new Board(this.cells);
     }
@@ -72,5 +78,9 @@ public class Board {
     public Cell[][] getCells()
     {
         return this.cells;
+    }
+
+    public void setCell(int x, int y, Cell.State state) {
+        this.cells[y][x].setState(state);
     }
 }
