@@ -125,7 +125,7 @@ public class Regles {
 	}
 
 
-	/* --------------------------------- ACCESSEUR --------------------------------- */ 
+ 	/* --------------------------------- ACCESSEUR --------------------------------- */ 
 	//Board
 	public Board getBoard()
 	{
@@ -141,9 +141,9 @@ public class Regles {
 	{
 		return this.nbCoups;
 	}
-	public void setNbCoups()
+	public void setNbCoups(int nbCoup)
 	{
-		this.nbCoups = nbCoups;
+		this.nbCoups = nbCoup;
 	}
 
 }
