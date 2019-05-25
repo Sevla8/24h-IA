@@ -48,7 +48,7 @@ public class Regles {
 		else
 		{
 			return false;
-		}
+		} 
 	}
 
 	//Règle 3
@@ -80,7 +80,7 @@ public class Regles {
 	//Règle 5
 	public boolean regle5(Cell c)
 	{
-		if ( this.regle1(c) && this.regle2(c) && this.regle3(c) && this.regle4(c) )
+		if ( this.regle2(c) && this.regle3(c) && this.regle4(c) )
 		{
 			return true;
 		}
