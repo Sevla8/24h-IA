@@ -70,7 +70,7 @@ public class Regles {
                 return false;
             }
         }
-        else<{
+        else {
             return true;
         }
 	}

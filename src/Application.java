@@ -30,7 +30,7 @@ public class Application {
                     System.out.println("Is opponent turn");
                     Point point = Client.instance().getOpponentPoint();
                     Cell cell= new Cell(point.x, point.y);
-                    setLesDernierCoups(cell);
+                    board.setLesDernierCoups(cell);
                     //board.setDernierCoup(board.getCells()[point.getX()][point.getY()]);
 					//ai.interpret(point);
 

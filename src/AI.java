@@ -166,7 +166,7 @@ public class AI {
 
             Cell cell = this.jouerList(this.possibylities());
             this.board.setCell(cell.getX(), cell.getY(), Cell.State.ME_PLAYED);
-            setLesDernierCoups(cell);
+            this.board.setLesDernierCoups(cell);
             return cell;
 		}
 		else
