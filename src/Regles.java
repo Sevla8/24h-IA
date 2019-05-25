@@ -18,7 +18,7 @@ public class Regles {
 		{
 			return true;
 		}
-		else
+		else 
 		{
 			return false;
 		}
@@ -26,9 +26,11 @@ public class Regles {
 	//Règle 1
 	public boolean regle1(Cell c)
 	{
+		
+		//if ( this.board.getNbCoups() == 0 )
 		if ( this.nbCoups == 0 )
 		{
-			return regle0(c);
+			return this.regle0(c);
 		}
 		else
 		{
@@ -41,7 +43,7 @@ public class Regles {
 	{
 		if ( c.getX() == this.board.getDernierCoup().getX() || c.getY() == this.board.getDernierCoup().getY() )
 		{
-			return regle0(c);
+			return this.regle0(c);
 		}
 		else
 		{
@@ -52,9 +54,9 @@ public class Regles {
 	//Règle 3
 	public boolean regle3(Cell c)
 	{
-		if ( c.getValue() != c.getDernierCoup().getValue() )
+		if ( c.getValue() != this.board.getDernierCoup().getValue() )
 		{
-			return regle0();
+			return this.regle0(c);
 		}
 		else
 		{
@@ -67,7 +69,7 @@ public class Regles {
 	{
 		if ( c.getValue() != this.board.getAvantDernierCoup().getValue() )
 		{
-			return regle0();
+			return this.regle0(c);
 		}
 		else
 		{
@@ -94,12 +96,12 @@ public class Regles {
 		Cell [][] cells = this.board.getCells();
 		Cell c = null;
 
-		for ( int i = 0 ; i < cells.lenght ; i++ )
+		for ( int i = 0 ; i < cells.length ; i++ )
 		{
-			for ( int j = 0 ; j < cells[i].lenght ; j++ )
+			for ( int j = 0 ; j < cells[i].length ; j++ )
 			{
 				c = cells[i][j];
-				if ( this.regle1(c) && this.regle2(c) && this.regle3(c) && this.regle4(c) )
+				if ( this.regle2(c) && this.regle3(c) && this.regle4(c) )
 				{
 					return true;
 				}
@@ -111,6 +113,7 @@ public class Regles {
 	//Fin de Partie ?
 	public boolean partieContinue()
 	{
+		//if ( this.board.getNbCoups() < 56 && regle6() )
 		if ( this.nbCoups < 56 && regle6() )
 		{
 			return true;
