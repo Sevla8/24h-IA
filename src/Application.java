@@ -1,10 +1,11 @@
+import java.awt.Point;
+
 public class Application {
 
 	public static void main(String[] args) {
 		Client.initialize();
 		boolean first = Client.instance().isFirstPlayer();
-		String mapString = Client.instance().recieveMap();
-		Board board = new Board(mapString);
+		Board board = Client.instance().recieveMap();
 		AI ai = new AI(board);
 
 		boolean latch = Client.instance().isFirstPlayer();

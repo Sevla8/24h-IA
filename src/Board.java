@@ -8,16 +8,30 @@ public class Board {
 
     private Cell cells[][];
 
-    public Board(){
+    public Board(String rawData, boolean binaryMode){
         this.cells = new Cell[BOARD_X][BOARD_Y];
-        for(int x = 0; x < BOARD_X; x++) {
-            for(int y = 0; y < BOARD_Y; y++) {
-                this.cells[x][y] = new Cell();
+
+        if(binaryMode) {
+            //TODO
+            
+        } else {
+            String[] splits = rawData.split("MAP=")[1].split("|");
+            for(int y = 0; y < splits.length; y++) {
+                String[] coords = splits[y].split(":");
+                for(int x = 0; x < coords.length; x++) {
+                    this.cells[x][y] = new Cell(coords[x].charAt(0), Cell.State.NOT_PLAYED, x, y);
+                }
             }
         }
     }
     public Board(Cell cells[][]) {
-        super();
+        
+        this.cells = new Cell[BOARD_X][BOARD_Y];
+        for(int x = 0; x < BOARD_X; x++) {
+            for(int y = 0; y < BOARD_Y; y++) {
+                this.cells[x][y] = new Cell(x, y);
+            }
+        }
 
         for(int x = 0; x < BOARD_X; x++) {
             for(int y = 0; y < BOARD_Y; y++) {
