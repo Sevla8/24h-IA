@@ -4,6 +4,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		Client.initialize();
+		System.out.println("test");
 		boolean first = Client.instance().isFirstPlayer();
 		Board board = Client.instance().recieveMap();
 		AI ai = new AI(board);
@@ -15,17 +16,18 @@ public class Application {
 			if(state != null) {
 				if(state.equals(Client.State.IS_MINE_TURN)) {
 
-					Point point = ai.play();
+					//Point point = ai.play();
+					Point point = new Point(2, 4);
 					Client.instance().sendPoint(point.x, point.y);
 
 				} else if(state.equals(Client.State.IS_OPPONENT_TURN)) {
 
 					Point point = Client.instance().getOpponentPoint();
-					ai.interpret(point);
+					//ai.interpret(point);
 
 				} else if(state.equals(Client.State.IS_ILLEGAL_OPPONENT_SHOT)) {
 					
-					ai.interpret(null);
+					//ai.interpret(null);
 
 				} else if(state.equals(Client.State.IS_MINE_SHOT_ILLEGAL)) {
 					

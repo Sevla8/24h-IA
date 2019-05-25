@@ -27,8 +27,6 @@ public class Client {
 
     private String receivedData;
 
-    private boolean isOurTurn;
-
     private int position;
 
     private boolean wantedBinary;
@@ -60,16 +58,24 @@ public class Client {
     private void connect() throws Exception {
         String data = "";
         try {
+            System.out.println("Try to connect...");
             this.socket = new DatagramSocket();
             this.address = InetAddress.getByName(SERVER_IP);
         } catch(IOException exception) {
             throw new Exception("Get by name failed");
         }
 
+        System.out.println("Connected ...");
+
         try {
             data = this.wantedBinary ? TEAMNAME : "#" + TEAMNAME;
+            System.out.println("Sending name.");
             this.sendData(data);
+            System.out.println("OK.");
+            System.out.println("Recieving player position.");
             data = this.receiveData();
+            System.out.println("OK.");
+            System.out.println(data);
             this.analyseFirstRequest(data);
             // then receive the map
         } catch(Exception sendDataException) {
@@ -135,7 +141,7 @@ public class Client {
         return this.isEndGame;
     }
 
-    public String recieveMap() {
+    public Board recieveMap() {
         String data = "";
         try {
             data = this.receiveData();
@@ -143,7 +149,7 @@ public class Client {
             return null;
         }
 
-        return data;
+        return new Board(data, this.wantedBinary);
     }
 
     public boolean isFirstPlayer() {
@@ -164,10 +170,5 @@ public class Client {
         }
 
         return new String(packet.getData());
-    }
-
-    public boolean isOurTurn() {
-
-        return this.isOurTurn;
     }
 }

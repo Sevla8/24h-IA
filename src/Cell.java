@@ -24,7 +24,8 @@ public class Cell {
     }
 
     public Cell(char c, State state, int x, int y) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
         this.c = c;
         this.state = state;
     }
