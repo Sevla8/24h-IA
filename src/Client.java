@@ -14,8 +14,8 @@ public class Client {
     }
 
     // server part
-    private static final int SERVER_PORT = 8000;
-    private static final String SERVER_IP = "172.16.97.13";
+    private static final int SERVER_PORT = 8025;
+    private static final String SERVER_IP = "172.16.97.194";
     private static final int BUFFER_SIZE = 300;
 
     private boolean isEndGame;
@@ -106,11 +106,14 @@ public class Client {
     public Point getOpponentPoint() {
         Point p = null;
         // opponent coup
-
-        String[] buffer = this.receivedData.split(":");
-        int x = buffer[3].charAt(0) - 65;
-        int y = Integer.parseInt(buffer[4]);
+        System.out.println("Raw data = " + this.receivedData);
+        String[] rawData = this.receivedData.split( "\n" );
+        String[] buffer = rawData[0].split(":");
+        int x = buffer[2].charAt(0) - 65;
+        int y = Integer.parseInt(buffer[3].trim());
         p = new Point(x, y);
+
+        System.out.println(p);
 
         return p;
     }
